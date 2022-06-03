@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
@@ -20,7 +20,22 @@ export default function App() {
     Poppins_700Bold
   });
 
-  if(fontsLoaded) SplashScreen.hideAsync();
+  useEffect(() => {
+    const showSplashScreen = async () => {
+      SplashScreen.preventAutoHideAsync();
+    };
+    showSplashScreen();
+  }, []);
+
+  useEffect(() => {
+    const hideSplashScreen = async () => {
+      await SplashScreen.hideAsync();
+    }
+
+    if(fontsLoaded) hideSplashScreen();
+  }, [fontsLoaded]);
+
+  if(!fontsLoaded) return null;
 
   return (
     <ThemeProvider theme={theme}>
