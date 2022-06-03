@@ -1,6 +1,7 @@
 import React from 'react';
-import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider } from 'styled-components/native';
+import { StatusBar } from 'expo-status-bar';
 import {
   useFonts,
   Poppins_400Regular,
@@ -19,10 +20,11 @@ export default function App() {
     Poppins_700Bold
   });
 
-  if(!fontsLoaded) return <AppLoading />
+  if(fontsLoaded) SplashScreen.hideAsync();
 
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar style='light' backgroundColor={theme.colors.primary}/>
       <Dashboard />
     </ThemeProvider>
   );
