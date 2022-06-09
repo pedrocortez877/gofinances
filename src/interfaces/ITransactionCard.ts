@@ -3,7 +3,11 @@ export interface Category{
   icon: string;
 }
 
-export interface Data{
+export interface TransactionTypeProps{
+  type: 'positive' | 'negative';
+}
+
+export interface Data extends TransactionTypeProps{
   title: string;
   amount: string;
   category: Category;
